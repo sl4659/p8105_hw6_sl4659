@@ -120,12 +120,12 @@ Based on these results, there’s clearly some improvement in predictive accurac
 ```{r downlaod}
 weather_df = 
   rnoaa::meteo_pull_monitors(
-    c("USC00519397"),
+    c("USW00094728"),
     var = c("PRCP", "TMIN", "TMAX"), 
     date_min = "2017-01-01",
     date_max = "2017-12-31") %>%
   mutate(
-    name = recode(id, USC00519397 = "Waikiki_HA"),
+    name = recode(id, USW00094728 = "CentralPark_NY"),
     tmin = tmin / 10,
     tmax = tmax / 10) %>%
   select(name, id, everything())
@@ -160,7 +160,7 @@ ggplot(tidy_df, aes(x = log)) + geom_density() + labs(title = "Distribution of l
 quantile(tidy_df$log, c(.025, .975))
 ```
 
-The distribution of log(beta0_hat*beta0_hat) has a somewhat heavy tail extending to low values and a bit of a “shoulder”, features that may be related to the frequency with which large outliers are included in the bootstrap sample.
+The distribution of log(beta0_hat*beta0_hat) basically follows normality while having a bit tail extending to low values, features that may be related to the frequency with which outliers are included in the bootstrap sample.
 
 ```{r r.squared}
 # extract r.squared from a fitted regression and plot density distribution
@@ -171,7 +171,7 @@ ggplot(glance_df, aes(x = r.squared)) + geom_density() + labs(title = "Distribut
 quantile(glance_df$r.squared, c(.025, .975))
 ```
 
-The distribution of r.squared has a bell-shaped curve that suggests normality.
+Similar to log(beta0_hat*beta0_hat), the distribution of r.squared has an approximately bell-shaped curve that suggests normality, while it also has a bit tail extending to low values, features that may be related to the frequency with which outliers are included in the bootstrap sample.
 
 
 
