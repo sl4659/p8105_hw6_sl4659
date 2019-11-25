@@ -82,7 +82,7 @@ bw_df = bw_df %>%
 ggplot(bw_df, aes(x = fitted_value, y = residual)) + geom_point() + labs(title = "Residuals vs Fitted values (centimeters)")
 ```
 
-Residuals form a horizontal (linear) ‘band’ around zero: above and below (indication of equal variance).
+Residuals form a horizontal (linear) ‘band’ around zero: above and below (indication of equal variance) with some outliers in the upper left corner.
 
 ### Compare to two other models
 ```{r compare}
